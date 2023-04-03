@@ -25,13 +25,12 @@ public class ThirdPersonMovement : MonoBehaviour
     public bool isGrounded;
     [Space(10)]
     [Header("Speed")]
-    public float walkSpeed = 10f;
-    public float sprintSpeed = 21f;
+    public float walkSpeed = 5f;
+    public float sprintSpeed = 15f;
     [Space(10)]
-    float speed = 10f;
+    float speed = 5f;
     float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
-    bool isRunning = false;
 
 
     Vector3 velocity;
@@ -84,15 +83,13 @@ public class ThirdPersonMovement : MonoBehaviour
 
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.A))
             {
-                isRunning = true;
                 speed = sprintSpeed;
             }
 
-            if (Input.GetKeyUp(KeyCode.Q))
+            if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.A))
             {
-                isRunning = false;
                 speed = walkSpeed;
             }
 
