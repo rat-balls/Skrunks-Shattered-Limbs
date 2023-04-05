@@ -20,8 +20,6 @@ public class Walk : MonoBehaviour
     }
     void Update()
     {   
-        
-
         if(Vector3.Distance(transform.position, rayTarget.position) > distance && otherFootGrounded.isGrounded)
         {
             transform.DOMove(rayTarget.position, duration);

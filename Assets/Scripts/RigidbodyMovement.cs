@@ -27,6 +27,14 @@ public class RigidbodyMovement : MonoBehaviour
         playerMovementInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
         playerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            speed = speed * 2;
+        } else if(Input.GetKeyUp(KeyCode.A))
+        {
+            speed = speed / 2;
+        }
+
         if(playerMovementInput.magnitude >= 0.1f){
             playerBody.MoveRotation(Quaternion.Euler(0f, playerCam.eulerAngles.y, 0f));
         }
