@@ -12,6 +12,8 @@ public class Boss : MonoBehaviour
     [SerializeField] float attackRange = 1f;
     [SerializeField] float aggroRange = 4f;
 
+    [SerializeField] UIBossHealthBar bossHealthBar;
+
     GameObject player;
     UnityEngine.AI.NavMeshAgent agent;
     Animator animator;
@@ -21,21 +23,24 @@ public class Boss : MonoBehaviour
     public float MaxHealth { get { return maxHealth; } }
     public float CurrentHealth { get { return currentHealth; } }
 
-
+    public bool isBoss;
 
     private void Awake()
     {
         player = GameObject.FindWithTag("Player");
         agent  = GetComponent<UnityEngine.AI.NavMeshAgent>();
         animator = GetComponent<Animator>();
-
+        bossHealthBar = FindObjectOfType<UIBossHealthBar>();
         currentHealth = maxHealth;
     }
 
 
     void Start()
-    {
-        currentHealth = maxHealth;
+    {   
+        if(!isBoss){
+            bossHealthBar.SetBossMaxHealth(maxHealth);
+        }
+        
     }
 
 

@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
 public class UIBossHealthBar : MonoBehaviour
 {
     public TextMeshProUGUI bossName;
@@ -36,15 +35,14 @@ public class UIBossHealthBar : MonoBehaviour
         slider.gameObject.SetActive(false);
     }
 
-    public void SetBossMaxHealth(int maxHealth)
+    public void SetBossMaxHealth(float maxHealth)
     {
         slider.maxValue = maxHealth;
         slider.value = maxHealth;
     }
 
-    public void SetBossCurrentHealth(int currentHealth)
+    public void SetBossCurrentHealth(float currentHealth)
     {
         slider.value = currentHealth;
     }
-
 }

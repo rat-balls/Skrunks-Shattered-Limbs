@@ -4,20 +4,34 @@ using UnityEngine;
 
 public class FogWall : MonoBehaviour
 {
+    private bool hasPlayerPassed = false;
 
-        private void Awake()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player" && !hasPlayerPassed)
         {
-            gameObject.SetActive(false);
+            hasPlayerPassed = true;
         }
+    }
 
-        public void ActivateFogWall()
-        {
-            gameObject.SetActive(true);
-        }
+    public bool HasPlayerPassed()
+    {
+        return hasPlayerPassed;
+    }
 
-        public void DeactivateFogWall()
+    public void ActivateFogWall()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void DeactivateFogWall()
+    {
+        if (!hasPlayerPassed)
         {
-            gameObject.SetActive(false);
+            return; // Do nothing if player hasn't passed the wall yet
         }
-    
+        
+        gameObject.SetActive(false);
+    }
 }
+

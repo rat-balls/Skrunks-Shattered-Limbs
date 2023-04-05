@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class EventColliderBeginBossFight : MonoBehaviour
 {
-    WordEventManager worldEventManager;
-
-    private void Awake()
-    {
-        worldEventManager = FindObjectOfType<WordEventManager>();
-    }   
+    public FogWall fogWall;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            worldEventManager.ActivateBossfight();
+            // Désactiver le collider du FogWall
+            fogWall.GetComponent<Collider>().isTrigger = false;
+
+            // Activer le FogWall
+            fogWall.ActivateFogWall();
+
+            // Activer le combat de boss
+            FindObjectOfType<WordEventManager>().ActivateBossfight();
         }
     }
 }
