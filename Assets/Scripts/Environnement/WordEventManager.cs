@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class WordEventManager : MonoBehaviour {
     
     // Fog Wall
+    public List<FogWall> fogWalls;
     public UIBossHealthBar UiBossHealthBar;
     public EnemyBossManager boss;
 
@@ -26,11 +27,21 @@ public class WordEventManager : MonoBehaviour {
         // Corrected variable name
         UiBossHealthBar.SetUIHealthBarToActive();
         // Active le mur
+        foreach (var fogWalls in fogWalls) 
+        {
+            fogWalls.ActivateFogWall();
+        }
+
     }
 
     public void BossHasBeenDefeated() {
         bossHasBeenDefeated = true;
         bossFightIsActive = false;
         // Désactive le mur
+        foreach (var fogWalls in fogWalls) 
+        {
+            fogWalls.DeactivateFogWall();
+        }
+
     }
 }
