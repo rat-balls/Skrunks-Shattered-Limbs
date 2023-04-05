@@ -5,6 +5,7 @@ using UnityEngine;
 public class EventColliderBeginBossFight : MonoBehaviour
 {
     public FogWall fogWall;
+    public AudioSource source;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,6 +13,8 @@ public class EventColliderBeginBossFight : MonoBehaviour
         {
             // Désactiver le collider du FogWall
             fogWall.GetComponent<Collider>().isTrigger = false;
+
+            source.Play();
 
             // Activer le FogWall
             fogWall.ActivateFogWall();
