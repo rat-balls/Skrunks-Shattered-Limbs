@@ -9,7 +9,6 @@ public class fixDistance : MonoBehaviour
     [SerializeField] private float dist;
     [SerializeField] private Transform shoulder;
     [SerializeField] private Transform hand;
-    [SerializeField] private AttackScript attackScript;
 
     void Start()
     {
@@ -20,7 +19,7 @@ public class fixDistance : MonoBehaviour
     void Update()
     {
 
-       if(Vector3.Distance(transform.position, shoulder.position) > dist && !attackScript.attacking)
+       if(Vector3.Distance(transform.position, shoulder.position) > dist)
        {
         transform.DOMove(hand.position, 0.5f);
        }

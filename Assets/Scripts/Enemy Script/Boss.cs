@@ -20,6 +20,7 @@ public class Boss : MonoBehaviour
     float timePassed;
     float newDestinationCD = 0.5f;
 
+    [SerializeField] private HealthScript HPscript;
     public float MaxHealth { get { return maxHealth; } }
     public float CurrentHealth { get { return currentHealth; } }
 
@@ -31,14 +32,14 @@ public class Boss : MonoBehaviour
         agent  = GetComponent<UnityEngine.AI.NavMeshAgent>();
         animator = GetComponent<Animator>();
         bossHealthBar = FindObjectOfType<UIBossHealthBar>();
-        currentHealth = maxHealth;
+        currentHealth = HPscript.HP;
     }
 
 
     void Start()
     {   
         if(!isBoss){
-            bossHealthBar.SetBossMaxHealth(maxHealth);
+            bossHealthBar.SetBossMaxHealth(HPscript.HP);
         }
         
     }
@@ -70,7 +71,7 @@ public class Boss : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        currentHealth -= damageAmount;
+        HPscript.HP -= damageAmount;
         animator.SetTrigger("damage");
 
         if (currentHealth <= 0)
