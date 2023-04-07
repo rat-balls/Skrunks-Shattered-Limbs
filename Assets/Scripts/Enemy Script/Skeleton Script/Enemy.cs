@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
 {
 
     [SerializeField] float health = 30;
-    public Slider healthBar;
 
 
     [Header("Combat")]
@@ -54,7 +53,6 @@ public class Enemy : MonoBehaviour
         newDestinationCD -= Time.deltaTime;
         transform.LookAt(player.transform);
 
-        healthBar.value = health;
 
     }
 
