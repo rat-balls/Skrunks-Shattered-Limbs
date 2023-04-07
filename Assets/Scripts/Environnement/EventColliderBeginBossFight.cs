@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class EventColliderBeginBossFight : MonoBehaviour
 {
-    public FogWall fogWall;
     public AudioSource source;
+    private bool hasPlayed = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasPlayed)
         {
-            // Désactiver le collider du FogWall
-            fogWall.GetComponent<Collider>().isTrigger = false;
+            // Activer tous les Fog Walls
+            foreach (FogWall fogWall in FindObjectOfType<WordEventManager>().fogWalls)
+            {
+                fogWall.GetComponent<Collider>().isTrigger = false;
+                fogWall.ActivateFogWall();
+            }
 
             source.Play();
-
-            // Activer le FogWall
-            fogWall.ActivateFogWall();
+            hasPlayed = true;
 
             // Activer le combat de boss
             FindObjectOfType<WordEventManager>().ActivateBossfight();

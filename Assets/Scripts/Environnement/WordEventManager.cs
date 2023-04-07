@@ -21,18 +21,19 @@ public class WordEventManager : MonoBehaviour {
         UiBossHealthBar = FindObjectOfType<UIBossHealthBar>();
     }
 
-    public void ActivateBossfight() {
-        bossFightIsActive = true;
-        bossHasBeenAwakened = true;
-        // Corrected variable name
-        UiBossHealthBar.SetUIHealthBarToActive();
-        // Active le mur
-        foreach (var fogWalls in fogWalls) 
-        {
-            fogWalls.ActivateFogWall();
-        }
-
+   public void ActivateBossfight() {
+    bossFightIsActive = true;
+    bossHasBeenAwakened = true;
+    UiBossHealthBar.SetUIHealthBarToActive();
+    // Activer les murs
+    foreach (var fogWall in fogWalls) {
+        fogWall.ActivateFogWall();
+        fogWall.GetComponent<Collider>().enabled = true; // activer le collider
     }
+    }   
+
+
+
 
     public void BossHasBeenDefeated() {
         bossHasBeenDefeated = true;
