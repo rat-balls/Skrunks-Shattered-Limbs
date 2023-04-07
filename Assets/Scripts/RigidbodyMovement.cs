@@ -5,15 +5,13 @@ using UnityEngine;
 public class RigidbodyMovement : MonoBehaviour
 {   
     private Vector3 playerMovementInput;
-    private Vector2 playerMouseInput;
-    private float xRot;
 
     [SerializeField] private Transform playerCam;
     [SerializeField] private Rigidbody playerBody;
     [Space]
     [SerializeField] private float speed;
-    [SerializeField] private float sensitivity;
     [SerializeField] private float jumpStrength;
+    [SerializeField] public Vector3 moveVector;
 
     private void Start() 
     {
@@ -25,7 +23,6 @@ public class RigidbodyMovement : MonoBehaviour
     void Update()
     {
         playerMovementInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-        playerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
         if(Input.GetKeyDown(KeyCode.A))
         {
@@ -48,7 +45,7 @@ public class RigidbodyMovement : MonoBehaviour
     private void movePlayer()
     {   
     
-        Vector3 moveVector = transform.TransformDirection(playerMovementInput) * speed;
+        moveVector = transform.TransformDirection(playerMovementInput) * speed;
         playerBody.velocity = new Vector3(moveVector.x, playerBody.velocity.y, moveVector.z);
         
 

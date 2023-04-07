@@ -9,6 +9,7 @@ public class Walk : MonoBehaviour
     [SerializeField] private float distance;
     [SerializeField] private float duration;
     [Space]
+    [SerializeField] private Walk thisFoot;
     [SerializeField] private Walk otherFoot;
     [SerializeField] private GroundCheck otherFootGrounded;
 
@@ -20,26 +21,29 @@ public class Walk : MonoBehaviour
     }
     void Update()
     {   
-        if(Vector3.Distance(transform.position, rayTarget.position) > distance && otherFootGrounded.isGrounded)
+        if(!otherFootGrounded.isGrounded){
+            StartCoroutine(wait());
+        } 
+
+        if(Vector3.Distance(transform.position, rayTarget.position) > distance)
         {
             transform.DOMove(rayTarget.position, duration);
             transform.DOLocalMoveY(1, 0.25f);
             StartCoroutine(walkHeight());
-            StartCoroutine(wait());
         }
-    }
-
-    private IEnumerator wait()
-    {
-        yield return new WaitForSeconds(0.5f);
-        otherFoot.enabled = true;
-        this.enabled = false;
     }
 
     private IEnumerator walkHeight()
     {
         yield return new WaitForSeconds(0.25f);
         transform.DOLocalMoveY(0, 0.25f);
+    }
+
+    private IEnumerator wait()
+    {
+        thisFoot.enabled = false;
+        yield return new WaitForSeconds(0.25f);
+        thisFoot.enabled = true;
     }
 
 }
