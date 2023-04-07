@@ -28,7 +28,7 @@ public class Walk : MonoBehaviour
         if(Vector3.Distance(transform.position, rayTarget.position) > distance)
         {
             transform.DOMove(rayTarget.position, duration);
-            transform.DOLocalMoveY(1, 0.25f);
+            transform.DOLocalMoveY(rayTarget.position.y + 1f, 0.25f);
             StartCoroutine(walkHeight());
         }
     }
@@ -36,7 +36,7 @@ public class Walk : MonoBehaviour
     private IEnumerator walkHeight()
     {
         yield return new WaitForSeconds(0.25f);
-        transform.DOLocalMoveY(0, 0.25f);
+        transform.DOLocalMoveY(rayTarget.position.y, 0.25f);
     }
 
     private IEnumerator wait()
